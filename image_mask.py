@@ -5,7 +5,7 @@ import numpy as np
 image = cv2.imread('image2.jpg')
 
 # Define the coordinates of the rectangular region you want to turn black
-x1, y1, x2, y2 = 100, 100, 300, 300
+x1, y1, x2, y2 = 0, 0, 1280, 450
 
 # Create a mask with the same dimensions as the image
 mask = np.zeros_like(image)
