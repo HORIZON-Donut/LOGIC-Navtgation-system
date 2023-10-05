@@ -1,25 +1,20 @@
 import cv2
 import numpy as np
 
-# Load the image
-image = cv2.imread('image2.jpg')
+# Load the RGB image
+image = cv2.imread('image2.jpg')  # Replace 'your_image.jpg' with the path to your image file
 
-# Define the coordinates of the rectangular region you want to turn black
-x1, y1, x2, y2 = 0, 0, 1280, 450
+# Define the vertices of the trapezoid as a list of points
+trapezoid_vertices = np.array([[150, 100], [300, 100], [400, 300], [100, 300]], np.int32)
+trapezoid_vertices = trapezoid_vertices.reshape((-1, 1, 2))
 
-# Create a mask with the same dimensions as the image
-mask = np.zeros_like(image)
+# Define the trapezoid color (in BGR format)
+trapezoid_color = (0, 0, 255)  # Red in BGR
 
-# Set the specified region in the mask to white (1)
-mask[y1:y2, x1:x2] = 255
+# Draw the filled trapezoid on the image
+cv2.fillPoly(image, [trapezoid_vertices], trapezoid_color)
 
-# Apply the mask to the image to make the specified region black
-result = cv2.bitwise_and(image, mask)
-
-# Display the edited image
-cv2.imshow('Edited Image', result)
+# Display the modified image (optional)
+cv2.imshow('Image with Trapezoid', image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
-
-# Save the edited image
-cv2.imwrite('edited_image.jpg', result)
